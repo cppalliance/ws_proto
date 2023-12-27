@@ -58,6 +58,7 @@ function(boost_ws_proto_setup_properties target)
             Boost::buffers
             Boost::config
             Boost::container_hash
+            Boost::http_proto
             Boost::system
             Boost::throw_exception
             Boost::url
@@ -74,13 +75,12 @@ file(GLOB_RECURSE BOOST_WS_PROTO_HEADERS CONFIGURE_DEPENDS
     include/boost/*.ipp
     include/boost/*.natvis
 )
-
-set(BOOST_WS_PROTO_SOURCES src/src.cpp)
+file(GLOB_RECURSE BOOST_WS_PROTO_SOURCES CONFIGURE_DEPENDS src/*.cpp)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/boost PREFIX "" FILES ${BOOST_WS_PROTO_HEADERS})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "" FILES ${BOOST_WS_PROTO_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "ws_proto" FILES ${BOOST_WS_PROTO_SOURCES})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "" FILES Jamfile)
 
 add_library(boost_ws_proto ${BOOST_WS_PROTO_HEADERS} ${BOOST_WS_PROTO_SOURCES})

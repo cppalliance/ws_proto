@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023 Vinnie Falco (vinnie dot falco at gmail dot com)
+// Copyright (c) 2023 Vinnie Falco (vinnie.falco@gmail.com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -7,25 +7,17 @@
 // Official repository: https://github.com/cppalliance/ws_proto
 //
 
-// Test that header file is self-contained.
-//#include <boost/ws_proto/string_body.hpp>
-
-#include "test_suite.hpp"
+#include <boost/ws_proto/handshake.hpp>
 
 namespace boost {
 namespace ws_proto {
 
-struct test_test
+system::result<bool>
+is_upgrade(
+    http_proto::request_view const& req) noexcept
 {
-    void
-    run()
-    {
-    }
-};
-
-TEST_SUITE(
-    test_test,
-    "boost.ws_proto.test");
+    return false;
+}
 
 } // ws_proto
 } // boost

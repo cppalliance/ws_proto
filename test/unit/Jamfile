@@ -27,7 +27,7 @@ project
     ;
 
 local SOURCES =
-    test.cpp
+    handshake.cpp
     ;
 
 for local f in $(SOURCES)

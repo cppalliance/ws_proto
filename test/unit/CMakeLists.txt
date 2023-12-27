@@ -15,7 +15,11 @@ set(EXTRAFILES
 set(PFILES
     CMakeLists.txt
     Jamfile
-    test.cpp
+    close_code.cpp
+    error.cpp
+    handshake.cpp
+    parser.cpp
+    serializer.cpp
     )
 
 set(UNIT_TEST_LINK_LIBRARIES boost_ws_proto)
