@@ -13,10 +13,10 @@ set(__ignore__ ${CMAKE_C_COMPILER})
 set(__ignore__ ${CMAKE_C_FLAGS})
 
 if(BOOST_CI_INSTALL_TEST)
-  find_package(Boost CONFIG REQUIRED COMPONENTS http_proto)
+  find_package(Boost CONFIG REQUIRED COMPONENTS ws_proto)
 else()
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-  add_subdirectory(../.. boostorg/http_proto)
+  add_subdirectory(../.. boostorg/ws_proto)
 
   set(BOOST_URL_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 
@@ -28,6 +28,7 @@ else()
     config
     container_hash
     core
+    http_proto
     mp11
     static_assert
     system
@@ -56,7 +57,7 @@ else()
 endif()
 
 add_executable(main main.cpp)
-target_link_libraries(main Boost::http_proto)
+target_link_libraries(main Boost::ws_proto)
 
 enable_testing()
 add_test(NAME main COMMAND main)

@@ -12,14 +12,10 @@ set(EXTRAFILES
     ../../../url/extra/test_suite.hpp
     )
 
-set(PFILES
+file(GLOB_RECURSE PFILES CONFIGURE_DEPENDS *.cpp *.hpp)
+list(APPEND PFILES
     CMakeLists.txt
     Jamfile
-    close_code.cpp
-    error.cpp
-    handshake.cpp
-    parser.cpp
-    serializer.cpp
     )
 
 set(UNIT_TEST_LINK_LIBRARIES boost_ws_proto)

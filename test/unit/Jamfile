@@ -15,15 +15,15 @@ using zlib ;
 project
     : requirements
       $(c11-requires)
-      <library>/boost/filesystem//boost_filesystem/<warnings>off
       <library>/boost/ws_proto//boost_ws_proto
       [ ac.check-library /zlib//zlib : <library>/zlib//zlib : ]
       [ ac.check-library /boost/ws_proto//boost_ws_proto_zlib : <library>/boost/ws_proto//boost_ws_proto_zlib : ]
       <source>../../../url/extra/test_main.cpp
-      <source>./test_helpers.cpp
       <include>.
       <include>../../../url/extra
-      <undefined-sanitizer>norecover:<link>static
+      <warnings>extra
+      <warnings-as-errors>on
+      <target-os>darwin,<undefined-sanitizer>norecover:<link>static
     ;
 
 local SOURCES =

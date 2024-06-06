@@ -14,7 +14,7 @@ namespace ws_proto {
 
 system::result<bool>
 is_upgrade(
-    http_proto::request_view const& req) noexcept
+    http_proto::request_view const& /*req*/) noexcept
 {
     return false;
 }

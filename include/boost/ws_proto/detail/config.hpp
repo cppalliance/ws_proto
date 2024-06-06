@@ -19,9 +19,6 @@ namespace ws_proto {
 
 //------------------------------------------------
 
-#if defined(BOOST_WS_PROTO_DOCS)
-# define BOOST_WS_PROTO_DECL
-#else
 # if (defined(BOOST_WS_PROTO_DYN_LINK) || defined(BOOST_ALL_DYN_LINK)) && !defined(BOOST_WS_PROTO_STATIC_LINK)
 #  if defined(BOOST_WS_PROTO_SOURCE)
 #   define BOOST_WS_PROTO_DECL        BOOST_SYMBOL_EXPORT
@@ -64,7 +61,6 @@ namespace ws_proto {
 #  endif
 #  include <boost/config/auto_link.hpp>
 # endif
-#endif
 
 //------------------------------------------------
 
@@ -77,9 +73,11 @@ namespace ws_proto {
     ::boost::system::error_code( (ev), [] { \
     static constexpr auto loc((BOOST_CURRENT_LOCATION)); \
     return &loc; }()))
-# define BOOST_WS_PROTO_RETURN_EC(ev) \
-    static constexpr auto loc ## __LINE__((BOOST_CURRENT_LOCATION)); \
-    return ::boost::system::error_code((ev), &loc ## __LINE__)
+# define BOOST_WS_PROTO_RETURN_EC(ev)                                  \
+    do {                                                                 \
+        static constexpr auto loc ## __LINE__((BOOST_CURRENT_LOCATION)); \
+        return ::boost::system::error_code((ev), &loc ## __LINE__);      \
+    } while(0)
 #endif
 
 } // ws_proto

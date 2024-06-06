@@ -28,7 +28,7 @@ endif()
 
 include(GNUInstallDirs)
 if(BOOST_WS_PROTO_IS_ROOT)
-    set(BOOST_INCLUDE_LIBRARIES ws_proto buffers filesystem url)
+    set(BOOST_INCLUDE_LIBRARIES ws_proto http_proto filesystem url)
     set(BOOST_EXCLUDE_LIBRARIES ws_proto)
     set(CMAKE_FOLDER Dependencies)
     add_subdirectory(../.. Dependencies/boost EXCLUDE_FROM_ALL)
@@ -55,7 +55,6 @@ function(boost_ws_proto_setup_properties target)
         PUBLIC
             Boost::align
             Boost::assert
-            Boost::buffers
             Boost::config
             Boost::container_hash
             Boost::http_proto
@@ -75,7 +74,7 @@ file(GLOB_RECURSE BOOST_WS_PROTO_HEADERS CONFIGURE_DEPENDS
     include/boost/*.ipp
     include/boost/*.natvis
 )
-file(GLOB_RECURSE BOOST_WS_PROTO_SOURCES CONFIGURE_DEPENDS src/*.cpp)
+file(GLOB_RECURSE BOOST_WS_PROTO_SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.hpp)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -83,7 +82,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/boost PREFIX "" FILES ${BO
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "ws_proto" FILES ${BOOST_WS_PROTO_SOURCES})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "" FILES Jamfile)
 
-add_library(boost_ws_proto ${BOOST_WS_PROTO_HEADERS} ${BOOST_WS_PROTO_SOURCES})
+add_library(boost_ws_proto ${BOOST_WS_PROTO_HEADERS} ${BOOST_WS_PROTO_SOURCES} build/Jamfile)
 add_library(Boost::ws_proto ALIAS boost_ws_proto)
 boost_ws_proto_setup_properties(boost_ws_proto)
 
@@ -97,6 +96,7 @@ if(BUILD_SHARED_LIBS)
 else()
     target_compile_definitions(boost_ws_proto PUBLIC BOOST_WS_PROTO_STATIC_LINK=1)
 endif()
+target_compile_definitions(boost_ws_proto PRIVATE BOOST_WS_PROTO_SOURCE)
 
 if(BOOST_WS_PROTO_INSTALL AND NOT BOOST_SUPERPROJECT_VERSION)
     install(TARGETS boost_ws_proto
@@ -107,22 +107,19 @@ if(BOOST_WS_PROTO_INSTALL AND NOT BOOST_SUPERPROJECT_VERSION)
 endif()
 
 if (ZLIB_FOUND)
-    set(BOOST_WS_PROTO_ZLIB_SOURCES src/src_zlib.cpp)
+    file(GLOB_RECURSE BOOST_WS_PROTO_ZLIB_SOURCES CONFIGURE_DEPENDS src_zlib/*.cpp)
 
-    file(GLOB_RECURSE BOOST_WS_PROTO_ZLIB_HEADERS CONFIGURE_DEPENDS
-        include/boost/ws_proto/serializer.hpp
-        include/boost/ws_proto/detail/impl/zlib_codec.ipp
-    )
-    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/boost PREFIX "" FILES ${BOOST_WS_PROTO_ZLIB_HEADERS})
-    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "" FILES ${BOOST_WS_PROTO_ZLIB_SOURCES})
+    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/boost PREFIX "" FILES ${BOOST_WS_PROTO_HEADERS})
+    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src_zlib PREFIX "ws_proto" FILES ${BOOST_WS_PROTO_ZLIB_SOURCES})
     source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/build PREFIX "" FILES build/Jamfile)
 
-    add_library(boost_ws_proto_zlib ${BOOST_WS_PROTO_ZLIB_HEADERS} ${BOOST_WS_PROTO_ZLIB_SOURCES} build/Jamfile)
+    add_library(boost_ws_proto_zlib ${BOOST_WS_PROTO_HEADERS} ${BOOST_WS_PROTO_ZLIB_SOURCES} build/Jamfile)
     add_library(Boost::ws_proto_zlib ALIAS boost_ws_proto_zlib)
 
     target_link_libraries(boost_ws_proto_zlib PUBLIC boost_ws_proto)
     target_link_libraries(boost_ws_proto_zlib PUBLIC ZLIB::ZLIB)
     target_compile_definitions(boost_ws_proto_zlib PUBLIC BOOST_WS_PROTO_HAS_ZLIB)
+    target_compile_definitions(boost_ws_proto_zlib PRIVATE BOOST_WS_PROTO_ZLIB_SOURCE)
 
     if(BOOST_WS_PROTO_INSTALL AND NOT BOOST_SUPERPROJECT_VERSION)
         install(TARGETS boost_ws_proto_zlib
