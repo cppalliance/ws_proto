@@ -17,5 +17,5 @@ call "C:\Program Files\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build
 call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 set "PATH=%PATH%;C:\Program Files\7-Zip"
 set "PATH=%PATH%;%CD%\node_modules\.bin"
-call npx antora --clean --fetch "%PLAYBOOK%"
+call npx antora --clean --fetch "%PLAYBOOK%" --stacktrace --log-level all
 echo Done

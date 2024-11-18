@@ -7,4 +7,16 @@
 // Official repository: https://github.com/cppalliance/ws_proto
 //
 
-//#include <boost/ws_proto/src_zlib.hpp>
+#include <boost/ws_proto/detail/config.hpp>
+
+namespace boost {
+namespace ws_proto {
+
+BOOST_WS_PROTO_ZLIB_DECL
+void
+dummy()
+{
+}
+
+} // ws_proto
+} // boost
