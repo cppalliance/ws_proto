@@ -7,6 +7,8 @@
 # Official repository: https://github.com/boostorg/url
 #
 
+set -xe
+
 if [ $# -eq 0 ]
   then
     echo "No playbook supplied, using default playbook"
@@ -22,6 +24,6 @@ npm ci
 echo "Building docs in custom dir..."
 PATH="$(pwd)/node_modules/.bin:${PATH}"
 export PATH
-npx antora --clean --fetch "$PLAYBOOK"
+npx antora --clean --fetch "$PLAYBOOK" --stacktrace --log-level all
 echo "Done"
 
