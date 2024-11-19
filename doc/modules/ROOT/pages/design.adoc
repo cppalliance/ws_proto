@@ -1,0 +1,84 @@
+//
+// Copyright (c) 2024 Vinnie Falco (vinnie.falco@gmail.com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at https://www.boost.org/LICENSE_1_0.txt)
+//
+// Official repository: https://github.com/cppalliance/ws_proto
+//
+
+
+= Design
+
+Websocket data is divided into frames, consisting of a header containing a
+length followed by a sequence of bytes called the payload. A message can be
+broken up into multiple frames, while a control frame is always delivered in
+a single frame. All but the first frame of a message is called a continuation
+frame, while the last frame of a message is called a final frame.
+
+The diagram below shows a complete frame followed by an incomplete frame:
+
+[source]
+----
+|  frame  | partial...
+----
+
+== Reading
+
+When network I/O is performed, ideal results are achieved when the amount of
+work achieved per operation is maximized. This is because of the significant
+fixed cost for each I/O. The fraction of resources lost to overhead can be
+reduced by using the largest practically sized buffer possible in each read
+operation.
+
+The `ws_proto::frame_stream` decoder uses a persistent, fixed-size internal
+buffer to hold incoming bytes from the peer and decode the frames inside.
+Because the buffer does not resize, this can produce zero or more complete
+frames and up to two partial frames. At the beginning of a session, the first
+input buffer will usually contain zero or more complete frames, and up to one
+partial frame:
+
+[source]
+----
+|  frame  |  frame  | partial...
+----
+
+A partial frame is created when the last frame in the buffer cannot fit
+completely. In this case, the remainder of the frame payload will appear in the
+next buffer of data received from the peer:
+
+[source]
+----
+  ...partial  |  frame  |  frame  |
+----
+
+Depending on the size of the read buffer and the length of incoming frames, the
+decoded contents may not contain any complete frames:
+
+[source]
+----
+  ...partial | partial...
+----
+
+It is also possible that the current contents of the read buffer do not contain
+enough frame data to produce a complete message:
+
+[source]
+----
+  ...partial...
+----
+
+The maximum payload size for a control frame is 127 bytes. A partial control
+frame can appear at the beginning of the read buffer, the end of the read
+buffer, or both ends. The library buffers partial control frame data and always
+delivers complete control frames to the caller as a single contiguous span of
+bytes.
+
+=== Read Results
+
+The default behavior of the library when returning decoded results from a frame
+stream is as follows:
+
+* Control frames are returned as a span of bytes
+* Complete message frames are returned as a span of bytes
+* Partial message frames are returned as if they were complete
