@@ -50,21 +50,4 @@ lib boost_ws_proto
      <library>/boost//http_proto
    ;
 
-alias ws_proto_zlib_sources : [ glob-tree-ex ./src_zlib : *.cpp ] ;
-
-explicit ws_proto_zlib_sources ;
-
-lib boost_ws_proto_zlib
-   : ws_proto_zlib_sources
-   : requirements
-     <library>/boost//http_proto
-     <library>/boost/ws_proto//boost_ws_proto
-     [ ac.check-library /zlib//zlib : <library>/zlib//zlib : <build>no ]
-     <define>BOOST_WS_PROTO_ZLIB_SOURCE
-   : usage-requirements
-     <library>/boost//http_proto
-     <library>/boost/ws_proto//boost_ws_proto
-     <define>BOOST_WS_PROTO_HAS_ZLIB
-   ;
-
-boost-install boost_ws_proto boost_ws_proto_zlib ;
+boost-install boost_ws_proto ;
