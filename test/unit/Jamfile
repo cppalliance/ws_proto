@@ -16,7 +16,7 @@ project
     : requirements
       $(c11-requires)
       <library>/boost/ws_proto//boost_ws_proto
-      [ ac.check-library /boost/ws_proto//boost_ws_proto_zlib : <library>/boost/ws_proto//boost_ws_proto_zlib : ]
+      [ ac.check-library /boost/http_proto//boost_http_proto_zlib : <library>/boost/http_proto//boost_http_proto_zlib : ]
       <source>../../../url/extra/test_main.cpp
       <include>.
       <include>../../../url/extra
