@@ -44,6 +44,7 @@ lib boost_ws_proto
    : requirements
      <library>/boost//buffers
      <library>/boost//http_proto
+     <library>/boost//url
      <include>../
      <define>BOOST_WS_PROTO_SOURCE
    : usage-requirements

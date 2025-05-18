@@ -26,6 +26,8 @@ system::result<bool>
 is_upgrade(
     http_proto::request_view const& req) noexcept;
 
+/** Return a Websocket Upgrade HTTP request
+*/
 BOOST_WS_PROTO_DECL
 http_proto::request
 make_upgrade(

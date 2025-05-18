@@ -55,6 +55,7 @@ set(BOOST_SRC_DIR ${DEFAULT_BOOST_SRC_DIR} CACHE STRING "Boost source dir to use
 # The boost super-project requires one explicit dependency per-line.
 set(BOOST_WS_PROTO_DEPENDENCIES
     Boost::http_proto
+    Boost::url
     )
 
 foreach (BOOST_WS_PROTO_DEPENDENCY ${BOOST_WS_PROTO_DEPENDENCIES})
@@ -126,13 +127,14 @@ endif ()
 #-------------------------------------------------
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-file(GLOB_RECURSE BOOST_WS_PROTO_HEADERS CONFIGURE_DEPENDS include/boost/*.hpp include/boost/*.natvis)
+file(GLOB_RECURSE BOOST_WS_PROTO_HEADERS CONFIGURE_DEPENDS include/boost/ws_proto/*.hpp include/boost/ws_proto/*.natvis)
 file(GLOB_RECURSE BOOST_WS_PROTO_SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.hpp)
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/boost PREFIX "" FILES ${BOOST_WS_PROTO_HEADERS})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "ws_proto" FILES ${BOOST_WS_PROTO_SOURCES})
+source_group("" FILES "include/boost/ws_proto.hpp" "build/Jamfile")
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/boost/ws_proto PREFIX "include" FILES ${BOOST_WS_PROTO_HEADERS})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "src" FILES ${BOOST_WS_PROTO_SOURCES})
 
-add_library(boost_ws_proto ${BOOST_WS_PROTO_HEADERS} ${BOOST_WS_PROTO_SOURCES})
+add_library(boost_ws_proto include/boost/ws_proto.hpp build/Jamfile ${BOOST_WS_PROTO_HEADERS} ${BOOST_WS_PROTO_SOURCES})
 add_library(Boost::ws_proto ALIAS boost_ws_proto)
 target_compile_features(boost_ws_proto PUBLIC cxx_constexpr)
 target_include_directories(boost_ws_proto PUBLIC "${PROJECT_SOURCE_DIR}/include")
