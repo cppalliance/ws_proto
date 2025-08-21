@@ -32,6 +32,7 @@ else()
     mp11
     static_assert
     system
+    rts
     throw_exception
     type_traits
     url

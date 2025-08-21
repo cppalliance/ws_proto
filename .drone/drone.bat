@@ -43,6 +43,9 @@ echo using zlib : : : ^<warnings^>off ^; >> !BOOST_ROOT!\project-config.jam
 REM Customizations
 cd
 pushd !BOOST_ROOT!\libs
+git clone https://github.com/cppalliance/rts -b !BOOST_BRANCH! --depth 1
+popd
+pushd !BOOST_ROOT!\libs
 git clone https://github.com/cppalliance/buffers -b !BOOST_BRANCH! --depth 1
 popd
 pushd !BOOST_ROOT!\libs
@@ -50,6 +53,7 @@ git clone https://github.com/cppalliance/http_proto -b !BOOST_BRANCH! --depth 1
 popd
 
 pushd !BOOST_ROOT!
+python tools/boostdep/depinst/depinst.py rts
 python tools/boostdep/depinst/depinst.py buffers
 python tools/boostdep/depinst/depinst.py http_proto
 python tools/boostdep/depinst/depinst.py ws_proto
