@@ -35,6 +35,12 @@ common_install () {
 
   . ./ci/common_install.sh
 
+  if [ ! -d "$BOOST_ROOT/libs/rts" ]; then
+    pushd $BOOST_ROOT/libs
+    git clone https://github.com/cppalliance/rts -b $BOOST_BRANCH --depth 1
+    popd
+  fi
+
   if [ ! -d "$BOOST_ROOT/libs/buffers" ]; then
     pushd $BOOST_ROOT/libs
     git clone https://github.com/cppalliance/buffers -b $BOOST_BRANCH --depth 1
@@ -127,6 +133,12 @@ cp -r $DRONE_BUILD_DIR/* libs/$SELF
 git submodule update --init --recursive
 
 # Customizations
+if [ ! -d "$BOOST_ROOT/libs/rts" ]; then
+  pushd $BOOST_ROOT/libs
+  git clone https://github.com/cppalliance/rts -b $BOOST_BRANCH --depth 1
+  popd
+fi
+
 if [ ! -d "$BOOST_ROOT/libs/buffers" ]; then
   pushd $BOOST_ROOT/libs
   git clone https://github.com/cppalliance/buffers -b $BOOST_BRANCH --depth 1
