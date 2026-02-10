@@ -4,11 +4,11 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
-// Official repository: https://github.com/cppalliance/ws_proto
+// Official repository: https://github.com/cppalliance/websocket
 //
 
-#ifndef BOOST_WS_PROTO_IMPL_SHA1_HPP
-#define BOOST_WS_PROTO_IMPL_SHA1_HPP
+#ifndef BOOST_WEBSOCKET_IMPL_SHA1_HPP
+#define BOOST_WEBSOCKET_IMPL_SHA1_HPP
 
 #include <cstdint>
 #include <cstddef>
@@ -24,7 +24,7 @@
 */
 
 namespace boost {
-namespace ws_proto {
+namespace websocket {
 namespace sha1 {
 
 static std::size_t constexpr BLOCK_INTS = 16;
@@ -57,7 +57,7 @@ finish(
     void* digest) noexcept;
 
 } // sha1
-} // ws_proto
+} // websocket
 } // boost
 
 #endif

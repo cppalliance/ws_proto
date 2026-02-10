@@ -13,51 +13,15 @@ set(__ignore__ ${CMAKE_C_COMPILER})
 set(__ignore__ ${CMAKE_C_FLAGS})
 
 if(BOOST_CI_INSTALL_TEST)
-  find_package(Boost CONFIG REQUIRED COMPONENTS ws_proto)
+  find_package(Boost CONFIG REQUIRED COMPONENTS websocket)
 else()
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-  add_subdirectory(../.. boostorg/ws_proto)
-
-  set(BOOST_URL_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-
-  set(deps
-    # Primary dependencies
-
-    assert
-    buffers
-    config
-    container_hash
-    core
-    http_proto
-    mp11
-    static_assert
-    system
-    rts
-    throw_exception
-    type_traits
-    url
-    winapi
-
-    # Secondary dependencies
-
-    describe
-    variant2
-    align
-    optional
-    predef
-    detail
-    utility
-    preprocessor
-    io
-  )
-
-  foreach(dep IN LISTS deps)
-    add_subdirectory(../../../${dep} boostorg/${dep} EXCLUDE_FROM_ALL)
-  endforeach()
+  set(BOOST_INCLUDE_LIBRARIES websocket)
+  add_subdirectory(../../../.. boostorg/boost)
 endif()
 
 add_executable(main main.cpp)
-target_link_libraries(main Boost::ws_proto)
+target_link_libraries(main Boost::websocket)
 
 enable_testing()
 add_test(NAME main COMMAND main)

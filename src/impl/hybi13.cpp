@@ -4,7 +4,7 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
-// Official repository: https://github.com/cppalliance/ws_proto
+// Official repository: https://github.com/cppalliance/websocket
 //
 
 #include "src/impl/hybi13.hpp"
@@ -17,7 +17,7 @@
 #include <string>
 
 namespace boost {
-namespace ws_proto {
+namespace websocket {
 namespace detail {
 
 void
@@ -51,6 +51,6 @@ make_response_key(
 }
 
 } // detail
-} // ws_proto
+} // websocket
 } // boost
 

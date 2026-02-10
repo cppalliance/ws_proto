@@ -1,6 +1,6 @@
 {
-    "key": "ws_proto",
-    "name": "Websockets Proto",
+    "key": "websocket",
+    "name": "Websocket",
     "authors": [
         "Vinnie Falco"
     ],

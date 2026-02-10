@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <explicit-failures-markup>
-    <!-- ws_proto -->
-    <library name="ws_proto">
+    <!-- websocket -->
+    <library name="websocket">
         <mark-unusable>
             <toolset name="*c++98"/>
             <toolset name="*gnu98"/>

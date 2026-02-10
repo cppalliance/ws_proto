@@ -4,33 +4,33 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
-// Official repository: https://github.com/cppalliance/ws_proto
+// Official repository: https://github.com/cppalliance/websocket
 //
 
-#ifndef BOOST_WS_PROTO_PARSER_HPP
-#define BOOST_WS_PROTO_PARSER_HPP
+#ifndef BOOST_WEBSOCKET_PARSER_HPP
+#define BOOST_WEBSOCKET_PARSER_HPP
 
-#include <boost/ws_proto/detail/config.hpp>
+#include <boost/websocket/detail/config.hpp>
 #include <stdexcept>
 
 namespace boost {
-namespace ws_proto {
+namespace websocket {
 
 class parser
 {
 public:
-    BOOST_WS_PROTO_DECL
+    BOOST_WEBSOCKET_DECL
     explicit
     parser(
         std::size_t n);
 
-    BOOST_WS_PROTO_DECL
+    BOOST_WEBSOCKET_DECL
     ~parser();
 
 
 };
 
-} // ws_proto
+} // websocket
 } // boost
 
 #endif

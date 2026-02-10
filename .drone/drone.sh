@@ -35,9 +35,9 @@ common_install () {
 
   . ./ci/common_install.sh
 
-  if [ ! -d "$BOOST_ROOT/libs/rts" ]; then
+  if [ ! -d "$BOOST_ROOT/libs/capy" ]; then
     pushd $BOOST_ROOT/libs
-    git clone https://github.com/cppalliance/rts -b $BOOST_BRANCH --depth 1
+    git clone https://github.com/cppalliance/capy -b $BOOST_BRANCH --depth 1
     popd
   fi
 
@@ -47,16 +47,16 @@ common_install () {
     popd
   fi
 
-  if [ ! -d "$BOOST_ROOT/libs/http_proto" ]; then
+  if [ ! -d "$BOOST_ROOT/libs/http" ]; then
     pushd $BOOST_ROOT/libs
-    git clone https://github.com/cppalliance/http_proto -b $BOOST_BRANCH --depth 1
+    git clone https://github.com/cppalliance/http -b $BOOST_BRANCH --depth 1
     popd
   fi
   
   pushd $BOOST_ROOT
   $pythonexecutable tools/boostdep/depinst/depinst.py buffers
-  $pythonexecutable tools/boostdep/depinst/depinst.py http_proto
-  $pythonexecutable tools/boostdep/depinst/depinst.py ws_proto
+  $pythonexecutable tools/boostdep/depinst/depinst.py http
+  $pythonexecutable tools/boostdep/depinst/depinst.py websocket
   popd
 }
 
@@ -133,9 +133,9 @@ cp -r $DRONE_BUILD_DIR/* libs/$SELF
 git submodule update --init --recursive
 
 # Customizations
-if [ ! -d "$BOOST_ROOT/libs/rts" ]; then
+if [ ! -d "$BOOST_ROOT/libs/capy" ]; then
   pushd $BOOST_ROOT/libs
-  git clone https://github.com/cppalliance/rts -b $BOOST_BRANCH --depth 1
+  git clone https://github.com/cppalliance/capy -b $BOOST_BRANCH --depth 1
   popd
 fi
 
@@ -145,9 +145,9 @@ if [ ! -d "$BOOST_ROOT/libs/buffers" ]; then
   popd
 fi
 
-if [ ! -d "$BOOST_ROOT/libs/http_proto" ]; then
+if [ ! -d "$BOOST_ROOT/libs/http" ]; then
   pushd $BOOST_ROOT/libs
-  git clone https://github.com/cppalliance/http_proto -b $BOOST_BRANCH --depth 1
+  git clone https://github.com/cppalliance/http -b $BOOST_BRANCH --depth 1
   popd
 fi
 

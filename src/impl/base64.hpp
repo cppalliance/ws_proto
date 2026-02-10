@@ -4,17 +4,17 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
-// Official repository: https://github.com/cppalliance/ws_proto
+// Official repository: https://github.com/cppalliance/websocket
 //
 
-#ifndef BOOST_WS_PROTO_SRC_IMPL_BASE64_HPP
-#define BOOST_WS_PROTO_SRC_IMPL_BASE64_HPP
+#ifndef BOOST_WEBSOCKET_SRC_IMPL_BASE64_HPP
+#define BOOST_WEBSOCKET_SRC_IMPL_BASE64_HPP
 
 #include <cctype>
 #include <utility>
 
 namespace boost {
-namespace ws_proto {
+namespace websocket {
 
 char const*
 base64_alphabet() noexcept;
@@ -67,7 +67,7 @@ base64_encode(void* dest, void const* src, std::size_t len);
 std::pair<std::size_t, std::size_t>
 base64_decode(void* dest, char const* src, std::size_t len);
 
-} // ws_proto
+} // websocket
 } // boost
 
 #endif

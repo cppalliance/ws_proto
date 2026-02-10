@@ -1,6 +1,6 @@
-name: ws_proto
+name: websocket
 version: ~
-title: Boost.WS.Proto
+title: Boost.Websocket
 start_page: index.adoc
 asciidoc:
   attributes:
@@ -11,3 +11,6 @@ nav:
 ext:
   cpp-reference:
     config: doc/mrdocs.yml
+  cpp-tagfiles:
+    using-namespaces:
+      - boost::websocket

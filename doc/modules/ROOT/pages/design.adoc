@@ -4,7 +4,7 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at https://www.boost.org/LICENSE_1_0.txt)
 //
-// Official repository: https://github.com/cppalliance/ws_proto
+// Official repository: https://github.com/cppalliance/websocket
 //
 
 
@@ -31,7 +31,7 @@ fixed cost for each I/O. The fraction of resources lost to overhead can be
 reduced by using the largest practically sized buffer possible in each read
 operation.
 
-The `ws_proto::frame_stream` decoder uses a persistent, fixed-size internal
+The `websocket::frame_stream` decoder uses a persistent, fixed-size internal
 buffer to hold incoming bytes from the peer and decode the frames inside.
 Because the buffer does not resize, this can produce zero or more complete
 frames and up to two partial frames. At the beginning of a session, the first
