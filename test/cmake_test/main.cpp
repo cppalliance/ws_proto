@@ -1,4 +1,4 @@
-#include <boost/ws_proto.hpp>
+#include <boost/websocket.hpp>
 
 int main()
 {

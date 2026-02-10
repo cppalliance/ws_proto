@@ -4,7 +4,7 @@
 # Distributed under the Boost Software License, Version 1.0. (See accompanying
 # file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #
-# Official repository: https://github.com/cppalliance/ws_proto
+# Official repository: https://github.com/cppalliance/websocket
 #
 
 import ac ;
@@ -22,34 +22,34 @@ constant c11-requires :
     ]
     ;
 
-path-constant WS_PROTO_ROOT : .. ;
+path-constant WEBSOCKET_ROOT : .. ;
 
-project boost/ws_proto
+project boost/websocket
     : requirements
       $(c11-requires)
-      <link>shared:<define>BOOST_WS_PROTO_DYN_LINK=1
-      <link>static:<define>BOOST_WS_PROTO_STATIC_LINK=1
+      <link>shared:<define>BOOST_WEBSOCKET_DYN_LINK=1
+      <link>static:<define>BOOST_WEBSOCKET_STATIC_LINK=1
     : usage-requirements
-      <link>shared:<define>BOOST_WS_PROTO_DYN_LINK=1
-      <link>static:<define>BOOST_WS_PROTO_STATIC_LINK=1
-    : source-location $(WS_PROTO_ROOT)
+      <link>shared:<define>BOOST_WEBSOCKET_DYN_LINK=1
+      <link>static:<define>BOOST_WEBSOCKET_STATIC_LINK=1
+    : source-location $(WEBSOCKET_ROOT)
     ;
 
-alias ws_proto_sources : [ glob-tree-ex ./src : *.cpp ] ;
+alias websocket_sources : [ glob-tree-ex ./src : *.cpp ] ;
 
-explicit ws_proto_sources ;
+explicit websocket_sources ;
 
-lib boost_ws_proto
-   : ws_proto_sources
+lib boost_websocket
+   : websocket_sources
    : requirements
      <library>/boost//buffers
-     <library>/boost//http_proto
+     <library>/boost//http
      <library>/boost//url
      <include>../
-     <define>BOOST_WS_PROTO_SOURCE
+     <define>BOOST_WEBSOCKET_SOURCE
    : usage-requirements
      <library>/boost//buffers
-     <library>/boost//http_proto
+     <library>/boost//http
    ;
 
-boost-install boost_ws_proto ;
+boost-install boost_websocket ;

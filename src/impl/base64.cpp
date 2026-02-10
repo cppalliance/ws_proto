@@ -4,7 +4,7 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
-// Official repository: https://github.com/cppalliance/ws_proto
+// Official repository: https://github.com/cppalliance/websocket
 //
 
 /*
@@ -42,7 +42,7 @@
 #include <utility>
 
 namespace boost {
-namespace ws_proto {
+namespace websocket {
 
 char const*
 base64_alphabet() noexcept
@@ -175,5 +175,5 @@ base64_decode(void* dest, char const* src, std::size_t len)
         in - reinterpret_cast<unsigned char const*>(src)};
 }
 
-} // ws_proto
+} // websocket
 } // boost

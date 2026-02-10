@@ -4,12 +4,12 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at https://www.boost.org/LICENSE_1_0.txt)
 //
-// Official repository: https://github.com/cppalliance/ws_proto
+// Official repository: https://github.com/cppalliance/websocket
 //
 
-= Boost.WS.Proto
+= Boost.Websocket
 
-Boost.WS.Proto is a portable C++ library which provides containers and
+Boost.Websocket is a portable C++ library which provides containers and
 algorithms which implement the HTTP/1.1 protocol, widely used to deliver content
 on the Internet. It adheres strictly to the HTTP/1.1 RFC specification
 (henceforth referred to as https://datatracker.ietf.org/doc/html/rfc9110[rfc9110,window=blank_]).
@@ -27,7 +27,7 @@ Standard types such as `error_code` or `string_view` use their Boost equivalents
 
 == Tested Compilers
 
-Boost.WS.Proto has been tested with the following compilers:
+Boost.Websocket has been tested with the following compilers:
 
 * clang:
 * gcc:

@@ -4,18 +4,18 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
-// Official repository: https://github.com/cppalliance/ws_proto
+// Official repository: https://github.com/cppalliance/websocket
 //
 
-#ifndef BOOST_WS_PROTO_SRC_IMPL_PCG_HPP
-#define BOOST_WS_PROTO_SRC_IMPL_PCG_HPP
+#ifndef BOOST_WEBSOCKET_SRC_IMPL_PCG_HPP
+#define BOOST_WEBSOCKET_SRC_IMPL_PCG_HPP
 
 #include <boost/core/ignore_unused.hpp>
 #include <cstdint>
 #include <random>
 
 namespace boost {
-namespace ws_proto {
+namespace websocket {
 namespace detail {
 
 class pcg
@@ -59,7 +59,7 @@ public:
 };
 
 } // detail
-} // ws_proto
+} // websocket
 } // boost
 
 #endif

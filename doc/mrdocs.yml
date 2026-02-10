@@ -9,20 +9,21 @@ file-patterns:
 
 # Filters
 include-symbols:
-  - 'boost::ws_proto::**'
+  - 'boost::websocket::**'
 implementation-defined:
-  - 'boost::ws_proto::detail'
-  - 'boost::ws_proto::*::detail'
+  - 'boost::websocket::detail'
+  - 'boost::websocket::*::detail'
 inaccessible-members: never
 inaccessible-bases: never
 
 # Generator
 generate: adoc
-base-url: https://www.github.com/cppalliance/ws_proto/blob/develop/include/
+base-url: https://www.github.com/cppalliance/websocket/blob/develop/include/
 
 # Style
 verbose: true
 multipage: true
 use-system-libc: true
+use-system-stdlib: true
 
-cmake: '-DCMAKE_CXX_STANDARD=20 -DBOOST_WS_PROTO_BUILD_TESTS=OFF -DBOOST_WS_PROTO_BUILD_EXAMPLES=OFF'
+cmake: '-DCMAKE_CXX_STANDARD=20 -DBOOST_WEBSOCKET_BUILD_TESTS=OFF -DBOOST_WEBSOCKET_BUILD_EXAMPLES=OFF'

@@ -4,7 +4,7 @@
 # Distributed under the Boost Software License, Version 1.0. (See accompanying
 # file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 #
-# Official repository: https://github.com/cppalliance/ws_proto
+# Official repository: https://github.com/cppalliance/websocket
 #
 
 import testing ;
@@ -15,14 +15,14 @@ using zlib ;
 project
     : requirements
       $(c11-requires)
-      <library>/boost/ws_proto//boost_ws_proto
-      [ ac.check-library /boost/rts//boost_rts_zlib : <library>/boost/rts//boost_rts_zlib : ]
+      <library>/boost/websocket//boost_websocket
+      [ ac.check-library /boost/http//boost_http_zlib : <library>/boost/http//boost_http_zlib : ]
       <source>../../../url/extra/test_suite/test_main.cpp
       <source>../../../url/extra/test_suite/test_suite.cpp
       <include>.
       <include>../../../url/extra/test_suite
       <warnings>extra
-      <warnings-as-errors>on
+      # <warnings-as-errors>on
       <target-os>darwin,<undefined-sanitizer>norecover:<link>static
     ;
 

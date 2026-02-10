@@ -4,7 +4,7 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
-// Official repository: https://github.com/cppalliance/ws_proto
+// Official repository: https://github.com/cppalliance/websocket
 //
 
 //
@@ -30,14 +30,14 @@
     3. This notice may not be removed or altered from any source distribution.
 */
 
-#ifndef BOOST_WS_PROTO_SRC_IMPL_CHACHA_HPP
-#define BOOST_WS_PROTO_SRC_IMPL_CHACHA_HPP
+#ifndef BOOST_WEBSOCKET_SRC_IMPL_CHACHA_HPP
+#define BOOST_WEBSOCKET_SRC_IMPL_CHACHA_HPP
 
 #include <cstdint>
 #include <limits>
 
 namespace boost {
-namespace ws_proto {
+namespace websocket {
 namespace detail {
 
 template<std::size_t R>
@@ -69,28 +69,28 @@ class chacha
 
     void chacha_core()
     {
-        #define BOOST_WS_PROTO_CHACHA_ROTL32(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
+        #define BOOST_WEBSOCKET_CHACHA_ROTL32(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
 
-        #define BOOST_WS_PROTO_CHACHA_QUARTERROUND(x, a, b, c, d) \
-            x[a] = x[a] + x[b]; x[d] ^= x[a]; x[d] = BOOST_WS_PROTO_CHACHA_ROTL32(x[d], 16); \
-            x[c] = x[c] + x[d]; x[b] ^= x[c]; x[b] = BOOST_WS_PROTO_CHACHA_ROTL32(x[b], 12); \
-            x[a] = x[a] + x[b]; x[d] ^= x[a]; x[d] = BOOST_WS_PROTO_CHACHA_ROTL32(x[d],  8); \
-            x[c] = x[c] + x[d]; x[b] ^= x[c]; x[b] = BOOST_WS_PROTO_CHACHA_ROTL32(x[b],  7)
+        #define BOOST_WEBSOCKET_CHACHA_QUARTERROUND(x, a, b, c, d) \
+            x[a] = x[a] + x[b]; x[d] ^= x[a]; x[d] = BOOST_WEBSOCKET_CHACHA_ROTL32(x[d], 16); \
+            x[c] = x[c] + x[d]; x[b] ^= x[c]; x[b] = BOOST_WEBSOCKET_CHACHA_ROTL32(x[b], 12); \
+            x[a] = x[a] + x[b]; x[d] ^= x[a]; x[d] = BOOST_WEBSOCKET_CHACHA_ROTL32(x[d],  8); \
+            x[c] = x[c] + x[d]; x[b] ^= x[c]; x[b] = BOOST_WEBSOCKET_CHACHA_ROTL32(x[b],  7)
 
         for (unsigned i = 0; i < R; i += 2)
         {
-            BOOST_WS_PROTO_CHACHA_QUARTERROUND(block_, 0, 4,  8, 12);
-            BOOST_WS_PROTO_CHACHA_QUARTERROUND(block_, 1, 5,  9, 13);
-            BOOST_WS_PROTO_CHACHA_QUARTERROUND(block_, 2, 6, 10, 14);
-            BOOST_WS_PROTO_CHACHA_QUARTERROUND(block_, 3, 7, 11, 15);
-            BOOST_WS_PROTO_CHACHA_QUARTERROUND(block_, 0, 5, 10, 15);
-            BOOST_WS_PROTO_CHACHA_QUARTERROUND(block_, 1, 6, 11, 12);
-            BOOST_WS_PROTO_CHACHA_QUARTERROUND(block_, 2, 7,  8, 13);
-            BOOST_WS_PROTO_CHACHA_QUARTERROUND(block_, 3, 4,  9, 14);
+            BOOST_WEBSOCKET_CHACHA_QUARTERROUND(block_, 0, 4,  8, 12);
+            BOOST_WEBSOCKET_CHACHA_QUARTERROUND(block_, 1, 5,  9, 13);
+            BOOST_WEBSOCKET_CHACHA_QUARTERROUND(block_, 2, 6, 10, 14);
+            BOOST_WEBSOCKET_CHACHA_QUARTERROUND(block_, 3, 7, 11, 15);
+            BOOST_WEBSOCKET_CHACHA_QUARTERROUND(block_, 0, 5, 10, 15);
+            BOOST_WEBSOCKET_CHACHA_QUARTERROUND(block_, 1, 6, 11, 12);
+            BOOST_WEBSOCKET_CHACHA_QUARTERROUND(block_, 2, 7,  8, 13);
+            BOOST_WEBSOCKET_CHACHA_QUARTERROUND(block_, 3, 4,  9, 14);
         }
 
-        #undef BOOST_WS_PROTO_CHACHA_QUARTERROUND
-        #undef BOOST_WS_PROTO_CHACHA_ROTL32
+        #undef BOOST_WEBSOCKET_CHACHA_QUARTERROUND
+        #undef BOOST_WEBSOCKET_CHACHA_ROTL32
     }
 
 public:
@@ -120,7 +120,7 @@ public:
 };
 
 } // detail
-} // ws_proto
+} // websocket
 } // boost
 
 #endif
